@@ -1,3 +1,8 @@
+/*
+Name: DavidWassmanProj1.cpp
+Purpose: Complete Programming Project 4 & 6
+*/
+
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -77,13 +82,24 @@ int main()
 	
 		// write code to test add entry and delete entry function
     // you may watch video notes to get idea for this part
-  	string *dynamicArray = new string("ABCDEF");
-		string sEven = *dynamicArray;
+  	
+		// setup test data
+		size = 5;
+		string *dynamicArray = new string[size];
 	
-		print(dynamicArray,sEven.length());
+		dynamicArray[0] = "Test1";
+		dynamicArray[1] = "Test2";
+		dynamicArray[2] = "Test3";
+		dynamicArray[3] = "Test4";
+		dynamicArray[4] = "Test5";
+
+		// Add entry to a dynamic array
+		dynamicArray = addEntry(dynamicArray, size, "Test6");	
+		print(dynamicArray, size);		
 	
-	
-		
+		// Remove entry from a dynamic array
+		dynamicArray = deleteEntry(dynamicArray, size, "Test3");
+		print(dynamicArray, size);		
 	
 		
 	
@@ -104,21 +120,22 @@ void reverse(char* front, char* rear)
 }
 	
 
-/*string* addEntry(string* dynamicArray, int& size, string newEntry)
+string* addEntry(string* dynamicArray, int& size, string newEntry)
 {
 	// you implement this. Please read Programming Project 6 on page 536
     // you may watch video notes to get the idea
-	char *newArray;
 	
-	newArray = new char[size + 1];
+	// Create new array for adding the entry
+	string *newArray = new string[++size];
 	
-	for(int i = 0; i < size; i++)
+	// Loop through the current dynamic array and add elements to new
+	for(int i = 0; i < size - 1; i++)
 	{
 		newArray[i] = dynamicArray[i];
 	}
 	
-	size++;
-	
+	// add new elemnt to last index of new array
+	newArray[size - 1] = newEntry;
 	return newArray;
 }
 
@@ -126,16 +143,46 @@ string* deleteEntry(string* dynamicArray, int& size, string entryToDelete)
 {
 	// you implement this. Please read Programming Project 6 on page 536
     // you may watch video notes to get the idea
+	
+	// New interger for new size
+	int newSize = 0;
+	
+	// Use for loop to iterate through the current dynamic array and add 
+		//to new size all elements not equal to entryToDelete
+	for(int i = 0; i < size; i++)
+	{
+		if(dynamicArray[i] != entryToDelete)
+		{
+			newSize++;
+		}
+	}
+	
+	// Create new dynamic array to the new size
+	string *newArray = new string[newSize];
+	
+	newSize = 0;
+	for(int i = 0; i < size; i++)
+	{
+		// Add elements from old dynamic array to new array if not equal
+			// to entryToDelete
+		if(dynamicArray[i] != entryToDelete)
+		{
+			newArray[newSize++] = dynamicArray[i];
+		}
+	}
+	
+	// Set size to new size
+	size = newSize;
+	return newArray;
 }
-//*/
+
 void print(const string* dynamicArray, int size)
 {
     // you implement this.
     // you may watch video notes to get the idea
-		string strTmp = *dynamicArray;
-	
-		for(int i = 0; i < size; i++)
-		{
-			cout << strTmp[i] << ' ' << i << endl;
-		}
+	// Simple loop to print out the elements of the array
+	for(int i = 0; i < size; i++)
+	{
+		cout << dynamicArray[i] << " " << i << endl;
+	}
 }
