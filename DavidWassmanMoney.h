@@ -1,6 +1,9 @@
 //Header file Money.h: This is the INTERFACE for the class Money
 //Values of this type are dollars and cents which are converted to total cents.
 //Input and output are in (-)$0.00 format
+#include <iostream>
+
+using namespace std;
 
 #ifndef MONEY_H
 #define MONEY_H
@@ -15,7 +18,7 @@ namespace std
 			Money(long dollars, int cents);
 		
 			//member functions
-			void operator -();
+			Money operator -();
 			//Precondition: class object declared and given value
 			//Postcondition: Returns negative of the value in class object
 			double getValue() const;
