@@ -7,7 +7,7 @@
 
 using namespace std;
 
-namespace {
+namespace {	//Helper functions restricted to implementation file
 	int digitToInt(char c);
 	//Converts char variables for numerical values to corresponding integer values
 	int isDigit(char c);
@@ -15,12 +15,12 @@ namespace {
 	
 	int digitToInt(char c)
 	{
-		return (int(c) - int('0'));
+		return (int(c) - int('0')); //ASCII math to get integer values
 	}
 	
 	int isDigit(char c)
 	{
-		if(int(c) > 47 && int(c) < 58)
+		if(int(c) > 47 && int(c) < 58)	//48 = '0' && 57 = '9'
 			return true;
 		else
 			return false;
@@ -40,10 +40,11 @@ namespace std
 	{}
 
 	//Member functions
-	Money Money::operator -()
+	Money Money::operator -() //Changed to a member function as it is a unary operator and be definition only affects one class object
 	{
-		return Money(0,allCents * -1);
-	}
+		return Money(0,allCents * -1);	//Return a Money object using constructor Money(long dollars, int cents)
+	}																	// Use 0 for dollars to initialize the cents value returned by allCents member variable
+	
 
 	double Money::getValue() const
 	{
@@ -52,22 +53,18 @@ namespace std
 
 	Money Money::percent(int percentFigure) const
 	{
-		Money temp;
-
-		temp.allCents = allCents * (percentFigure / 100);
-
-		return temp;
+		return Money(0,allCents * (percentFigure / 100.0)); 	
 	}
 
 	//Friend functions
 	Money operator +(const Money& amount1, const Money& amount2)
-	{
-		return amount1.allCents + amount2.allCents;
+	{		
+		return Money(0,amount1.allCents + amount2.allCents);
 	}
 
 	Money operator -(const Money& amount1, const Money& amount2)
 	{
-		return amount1.allCents - amount2.allCents;
+		return Money(0,amount1.allCents - amount2.allCents);
 	}
 
 	bool operator ==(const Money& amount1, const Money& amount2)
@@ -121,7 +118,7 @@ namespace std
 		if(ds == '-')
 		{
 			neg = true;
-			ins >> ds;
+			ins >> ds;	//Grabs '$'
 		}
 		
 		
@@ -137,7 +134,7 @@ namespace std
 		cents = digitToInt(d1) * 10 + digitToInt(d2);
 		amount.allCents = dollars * 100 + cents;
 		if(neg)
-			amount.allCents *= -1;
+			amount.allCents *= -1;	//Set allCents to negative if negative was entered
 
 		return ins;
 	}
@@ -153,14 +150,14 @@ namespace std
 		if(cents < 0)
 		{
 			outs << '-';
-			cents *= -1;
+			cents *= -1;	//Set cents to positive if negative
 		}
 
-		outs << '$' << cents / 100 << '.';
+		outs << '$' << cents / 100 << '.'; // Display dollar portion of cents
 
-		cents = cents % 100;
+		cents = cents % 100;	//set cents to cents portion of allCents
 		if(cents < 10)
-			outs << '0';
+			outs << '0';	//Pad display if < 10
 
 		outs << cents;
 
