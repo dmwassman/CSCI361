@@ -4,23 +4,27 @@
 using namespace std;
 using namespace FHSULINKEDLIST;
 
-namespace std
+namespace FHSULINKEDLIST
 {
-	size_t list_length(Node* head_ptr){
-		size_t index = 0;
-		Node* here = head_ptr;
+	size_t list_length(const Node* head_ptr){
+		size_t index = 1;
+		Node* here;
+    here = new Node;
 
-		if(here == NULL)
+		if(head_ptr == NULL)
 		{
 			return 0;
 		}
 		else
 		{
+      here->link = head_ptr->link;
 			while(here->link != NULL)
 			{
 				index++;
 				here = here->link;
 			}
+      
+      cout << index;
 
 			return index;
 		}
@@ -201,16 +205,33 @@ namespace std
 	Node* list_copy_front(Node* source_ptr, size_t n)
 	{
 		
-		Node* return_ptr;
-		return_ptr = new Node;
+    
+  
+    
+    size_t count = 0;
 		
-		for(Node* temp_ptr = source_ptr; temp_ptr != NULL; temp_ptr = temp_ptr->link)
+    if(source_ptr == NULL)
+    {
+       return NULL;
+    }
+    else
+    {
+      Node* return_ptr;
+		return_ptr = new Node;
+      Node* nhead_ptr = return_ptr;
+        for(Node* temp_ptr = source_ptr; temp_ptr != NULL; temp_ptr = temp_ptr->link)
 		{
+      if(count < n)
+      {
 			return_ptr->data = temp_ptr->data;
 			return_ptr->link = temp_ptr->link;
+        count++;
+        }
 		}
+      
 		
 		
-		return return_ptr;
+		return nhead_ptr;
+      }
 	}
 }
