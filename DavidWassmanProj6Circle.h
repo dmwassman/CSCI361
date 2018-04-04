@@ -1,7 +1,4 @@
 //Header file Circle.h: This is the INTERFACE for the class Circle
-#include <string>
-
-using namespace std;
 
 #ifndef CIRCLE_H
 #define CIRCLE_H
