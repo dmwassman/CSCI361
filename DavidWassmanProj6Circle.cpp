@@ -2,7 +2,6 @@
 //Interface file Circle.h
 
 #include "DavidWassmanProj6Circle.h"
-#include <string>
 
 using namespace std;
 

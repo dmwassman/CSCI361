@@ -5,7 +5,7 @@
 #include "DavidWassmanProj6Shape.h"
 
 namespace std {
-	class Rectangle {
+	class Rectangle : public Shape {
 		public:
 			Rectangle();
 			Rectangle(int x, int y);
