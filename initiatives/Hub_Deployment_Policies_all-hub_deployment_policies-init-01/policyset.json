@@ -7,9 +7,30 @@
    "createdBy": "bdcaafdf-ea22-4e03-8806-60ddb420cd09",
    "createdOn": "2022-02-18T19:29:17.7842281Z",
    "updatedBy": "bdcaafdf-ea22-4e03-8806-60ddb420cd09",
-   "updatedOn": "2022-02-18T19:41:51.5278687Z"
+   "updatedOn": "2022-02-18T19:59:26.3306732Z"
   },
-  "parameters": {},
+  "parameters": {
+   "organization": {
+    "type": "string",
+    "metadata": {
+     "displayName": "Organization",
+     "description": "Organization the subscriptions belong to"
+    },
+    "allowedValues": [
+     "GRU",
+     "GG"
+    ],
+    "defaultValue": "GRU"
+   },
+   "department": {
+    "type": "string",
+    "metadata": {
+     "displayName": "Department",
+     "description": "Department the subscriptions belong to"
+    },
+    "defaultValue": "IT Technical Management"
+   }
+  },
   "policyDefinitions": [
    {
     "policyDefinitionReferenceId": "3157908548671697060",
@@ -34,7 +55,7 @@
     "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/61a4d60b-7326-440e-8051-9f94394d4dd1",
     "parameters": {
      "tagName": {
-      "value": "organization"
+      "value": "[parameters('organization')]"
      },
      "tagValue": {
       "value": "GRU"
@@ -47,10 +68,10 @@
     "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/61a4d60b-7326-440e-8051-9f94394d4dd1",
     "parameters": {
      "tagName": {
-      "value": "department"
+      "value": "[parameters('department')]"
      },
      "tagValue": {
-      "value": "IT Managed Services"
+      "value": "IT Technical Management"
      }
     },
     "groupNames": []
